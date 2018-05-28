@@ -1,0 +1,32 @@
+﻿@using System.Web.Routing
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Home Page";
+    Page.Description = "It academy website home page";
+
+    var pageUrl = Context.GetRouteValue("pageurl");
+
+    var db = Database.Open(App.Database);
+
+    if (pageUrl == null)
+    {
+        pageUrl = "/";
+    }
+
+    var sqltext = "select * from pages where url=@0";
+    var page = db.QuerySingle(sqltext, pageUrl);
+    if (page != null)
+    {
+        <p>@page.id hello, jjjj</p>
+
+
+
+    }else
+    {
+        Response.SetStatus(HttpStatusCode.NotFound);
+    }
+}
+
+
+
+

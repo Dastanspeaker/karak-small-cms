@@ -1,5 +1,32 @@
 ﻿@{
     var p = Page.Pane;
+    var contents = Page.PageData;
+    var db = Database.Open(App.Database);
 
+    if (p == "NavigationPane")
+    {
+        var sql = "select * from pages";
+        var pages = db.Query(sql);
+        foreach (var item in pages)
+        {
+            var url = item.url;
+            if(item.url=="/")
+            {
+                url = "";
+            }
+            <li class="active"><a href="~/@url">@item.page_name_in_menu</a></li>
+        }
+    }
 }
-<p>this is pane=@p</p>
+
+
+@foreach (var item in contents)
+{
+
+    if (item.pane_name == p)
+    {
+        RenderPage()
+        <p>this is pane=@item.title</p>
+    }
+}
+

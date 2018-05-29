@@ -1,8 +1,7 @@
 ﻿@using System.Web.Routing
 @{
     Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Home Page";
-    Page.Description = "It academy website home page";
+
 
     var pageUrl = Context.GetRouteValue("pageurl");
 
@@ -17,11 +16,24 @@
     var page = db.QuerySingle(sqltext, pageUrl);
     if (page != null)
     {
-        <p>@page.id hello, jjjj</p>
+        Page.Title = page.page_title;
+        Page.Description = page.page_descrioption;
+
+        sqltext = @"SELECT pc.id as pcid
+	                      ,pc.title
+	                      ,pc.plugid
+	                      ,pc.sort_position
+                          ,pc.pane_name
+	                      ,hc.htmltext
+                      FROM [pages] p
+                      inner join page_contents pc on pc.pid=pid
+                      inner join htmlcontent hc on pc.id=hc.pcid
+                      where p.id=@0";
+        Page.PageData = db.Query(sqltext, page.id);
 
 
-
-    }else
+    }
+    else
     {
         Response.SetStatus(HttpStatusCode.NotFound);
     }

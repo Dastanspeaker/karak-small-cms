@@ -38,10 +38,11 @@
                                 <a class="navbar-brand" href="#">WebSiteName</a>
                             </div>
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="~/">Home</a></li>
+                                @RenderPane("NavigationPane")
+                                @*<li class="active"><a href="~/">Home</a></li>
                                 <li><a href="~/About">About</a></li>
-                                <li><a href="~/Contact">Contact</a></li>
-                        
+                                <li><a href="~/Contact">Contact</a></li>*@
+
                                 <li class="float-right"><a href="~/Account/Register">Register</a></li>
                                 <li class="float-right"><a href="~/Account/Login">Log in</a></li>
                             </ul>
@@ -54,6 +55,8 @@
                     @RenderBody()
                     <br />
                     @RenderPane("contentPane")
+                    <hr />
+                    @RenderPane("bottomPane")
                 </div>
 
             </section>

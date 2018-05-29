@@ -26,7 +26,7 @@
                           ,pc.pane_name
 	                      ,hc.htmltext
                       FROM [pages] p
-                      inner join page_contents pc on pc.pid=pid
+                      inner join page_contents pc on pc.pid=p.id
                       inner join htmlcontent hc on pc.id=hc.pcid
                       where p.id=@0";
         Page.PageData = db.Query(sqltext, page.id);

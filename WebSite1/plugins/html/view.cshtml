@@ -1,1 +1,15 @@
-﻿
+﻿@{ 
+    var db = Database.Open(App.Database);
+    var data = Page.Data;
+    var sql = "select * from htmlcontent where pcid=@0";
+    var htmlc = db.QuerySingle(sql, data.id);
+
+}
+
+@if (htmlc != null)
+{
+<h2>@data.title</h2>
+<div>
+    @Html.Raw(htmlc.htmltext)
+</div>
+}

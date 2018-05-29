@@ -19,15 +19,13 @@
         Page.Title = page.page_title;
         Page.Description = page.page_descrioption;
 
-        sqltext = @"SELECT pc.id as pcid
+        sqltext = @"SELECT pc.id
 	                      ,pc.title
 	                      ,pc.plugid
 	                      ,pc.sort_position
                           ,pc.pane_name
-	                      ,hc.htmltext
                       FROM [pages] p
                       inner join page_contents pc on pc.pid=p.id
-                      inner join htmlcontent hc on pc.id=hc.pcid
                       where p.id=@0";
         Page.PageData = db.Query(sqltext, page.id);
 

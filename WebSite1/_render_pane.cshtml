@@ -25,8 +25,16 @@
 
     if (item.pane_name == p)
     {
-        RenderPage()
-        <p>this is pane=@item.title</p>
+        var sql = @"select pc.id, pc.title, pl.code_file 
+                    from page_contents pc
+                    inner join plugins pl on pc.plugid=pl.id 
+                    where pc.id=@0";
+        var plugin = db.QuerySingle(sql, item.id);
+        if (plugin != null)
+        {
+            @RenderPage(plugin.code_file, new { Data = plugin });
+        }
+        @*<p>this is pane=@item.title</p>*@
     }
 }
 
